@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-
+import Navbar from '@/components/Navbar';
 const SurveyForm = () => {
     const [questions, setQuestions] = useState([]);
     const [newQuestion, setNewQuestion] = useState('');
@@ -29,6 +29,7 @@ const SurveyForm = () => {
 
     return (
         <div>
+            <Navbar/>
             <h1>Formulario para Crear Cuestionario</h1>
             <div>
                 <input
