@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { url } from '@/utils/backend-route';
+import Navbar from '@/components/Navbar';
 const OrganizationalStructureForm = () => {
     
     const [structure, setStructure] = useState([]);
@@ -14,8 +15,23 @@ const OrganizationalStructureForm = () => {
     });
     useEffect(() => {
         fetchData();
+        fetchWorkers();
     }, []);
-
+    const fetchWorkers = async () => {
+        try {
+            const response = await fetch(`${url}/api/trabajadores`, {
+                method: 'GET',
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setWorkers(data);
+            } else {
+                console.error('Error fetching workers data');
+            }
+        } catch (error) {
+            console.error('Error fetching workers data:', error);
+        }
+    };
     const fetchData = async () => {
         try {
             const response = await fetch(`${url}/api/divisiones`, {
@@ -146,6 +162,7 @@ const OrganizationalStructureForm = () => {
     };
     return (
         <div>
+        <Navbar/>
         <h2>Organizational Structure</h2>
         {!isDataSaved && <button onClick={handleAddDivision}>Add Division</button>}
         <ul>
@@ -219,6 +236,27 @@ const OrganizationalStructureForm = () => {
                     </form>
                 </>
             )}
+            <div>
+            <h2>Workers</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Division</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {workers.map((worker, index) => (
+                        <tr key={index}>
+                            <td>{worker.code}</td>
+                            <td>{worker.firstName} {worker.lastName}</td>
+                            <td>{worker.division}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
         </div>
     );
     };
