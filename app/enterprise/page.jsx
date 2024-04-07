@@ -117,16 +117,16 @@ const OrganizationalStructureForm = () => {
         updatedStructure[divisionIndex].subdivisions[subIndex].subdivisions.push(newSubdivision);
         setStructure(updatedStructure);
     };
-    const handleAddWorker = () => {
-        // Agregar validación de campos y lógica para agregar trabajador
-        const newWorker = {
-            firstName: workerFormData.firstName,
-            lastName: workerFormData.lastName,
-            division: workerFormData.division
-        };
-        setWorkers([...workers, newWorker]);
-        setWorkerFormData({ firstName: '', lastName: '', division: '' });
-    };
+    // const handleAddWorker = () => {
+    //     // Agregar validación de campos y lógica para agregar trabajador
+    //     const newWorker = {
+    //         firstName: workerFormData.firstName,
+    //         lastName: workerFormData.lastName,
+    //         division: workerFormData.division
+    //     };
+    //     setWorkers([...workers, newWorker]);
+    //     setWorkerFormData({ firstName: '', lastName: '', division: '' });
+    // };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
