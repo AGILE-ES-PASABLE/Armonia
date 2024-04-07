@@ -2,6 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import { url } from '@/utils/backend-route';
 import Navbar from '@/components/Navbar';
+import Link from 'next/link';
+const copyToClipboard = (text) => {
+    const textField = document.createElement('textarea');
+    textField.innerText = text;
+    document.body.appendChild(textField);
+    textField.select();
+    document.execCommand('copy');
+    textField.remove();
+};      
 const SurveyForm = () => {
     const [questions, setQuestions] = useState([]);
     const [newQuestion, setNewQuestion] = useState('');
@@ -29,6 +38,7 @@ const SurveyForm = () => {
                 console.log('Data fetched:', [data[0].survey]);
                 setIsDataSaved(true);
                 setSurvey(data[0].survey);
+                localStorage.setItem('survey', JSON.stringify(data[0].survey));
             } else {
                 console.error('Error fetching data');
             }
@@ -94,6 +104,12 @@ const SurveyForm = () => {
         return { dimension, questions: dimensionQuestions };
     });
 
+    const handleButtonClick = () => {
+        const link = `${url}/resolver_encuesta`; // Aquí debes colocar la ruta correcta
+        copyToClipboard(link);
+        alert('The link was copied');
+    };
+
     return (
         <div>
             <Navbar/>
@@ -150,6 +166,7 @@ const SurveyForm = () => {
                     </tbody>
                 </table>
             )}
+            <button onClick={handleButtonClick}>Copy Link</button>
         </div>
     );
 };

@@ -117,16 +117,16 @@ const OrganizationalStructureForm = () => {
         updatedStructure[divisionIndex].subdivisions[subIndex].subdivisions.push(newSubdivision);
         setStructure(updatedStructure);
     };
-    // const handleAddWorker = () => {
-    //     // Agregar validación de campos y lógica para agregar trabajador
-    //     const newWorker = {
-    //         firstName: workerFormData.firstName,
-    //         lastName: workerFormData.lastName,
-    //         division: workerFormData.division
-    //     };
-    //     setWorkers([...workers, newWorker]);
-    //     setWorkerFormData({ firstName: '', lastName: '', division: '' });
-    // };
+    const handleAddWorker = () => {
+        // Agregar validación de campos y lógica para agregar trabajador
+        const newWorker = {
+            firstName: workerFormData.firstName,
+            lastName: workerFormData.lastName,
+            division: workerFormData.division
+        };
+        setWorkers([...workers, newWorker]);
+        setWorkerFormData({ firstName: '', lastName: '', division: '' });
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -142,6 +142,8 @@ const OrganizationalStructureForm = () => {
     };
     const saveWorker = async (event) => {
         event.preventDefault();
+        const isFieldEmpty = Object.values(workerFormData).some((value) => value === '');
+        if (isFieldEmpty) { return alert('All fields are required'); }
         try {
             const response = await fetch(`${url}/api/trabajadores`, {
                 method: 'POST',
@@ -194,7 +196,7 @@ const OrganizationalStructureForm = () => {
             ))}
         </ul>
         {!isDataSaved && <button onClick={handleSave}>Save</button>}
-        {isDataSaved && <button onClick={deleteStructure}>Delete</button>}
+        {/* {isDataSaved && <button onClick={deleteStructure}>Delete</button>} */}
         {isDataSaved && (
                 <>
                     <form onSubmit={handleAddWorker}>

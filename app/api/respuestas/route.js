@@ -1,5 +1,5 @@
 // Importa los modelos y cualquier otra cosa necesaria
-import Worker from '../../../models/trabajadores';
+import Answer from '../../../models/respuestas';
 import { connectDB } from '../../../utils/db';
 import { NextResponse } from 'next/server';
 
@@ -8,10 +8,10 @@ export const GET = async () =>{
     await connectDB();
 
     try {
-        const trabajadores = await Worker.find();
-        return new NextResponse(JSON.stringify(trabajadores), { status: 200 });
+        const answers = await Answer.find();
+        return new NextResponse(JSON.stringify(answers), { status: 200 });
     } catch (error) {
-        return new NextResponse("Error in fetching trabajadores" + error, { status: 500 });
+        return new NextResponse("Error in fetching answers" + error, { status: 500 });
     }
 }
 
@@ -22,17 +22,17 @@ export const POST = async (request) => {
     try {
         const body = await request.json();
         console.log("body", body)
-        const newTranajador = new Worker(body);
-        const saveTrabajador = await newTranajador.save();
+        const newAnswer = new Answer(body);
+        const saveAnswer = await newAnswer.save();
         
         return new NextResponse(
-            JSON.stringify({ message: "trabajadores created", worker: saveTrabajador }),
+            JSON.stringify({ message: "answer created", answers: saveAnswer }),
             { status: 201 }
         );
     } catch (error) {
         return new NextResponse(
             JSON.stringify({
-                message: "Error in creating trabajadores",
+                message: "Error in creating answer",
                 error,
             }),
             { status: 500 }
