@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { url } from '@/utils/backend-route';
 import Navbar from '@/components/Navbar';
+import style from '@/styles/styles.module.css';
+
 const OrganizationalStructureForm = () => {
     
     const [structure, setStructure] = useState([]);
@@ -163,65 +165,81 @@ const OrganizationalStructureForm = () => {
         }
     };
     return (
-        <div>
+        <div className={style.container}>
         <Navbar/>
-        <h2>Organizational Structure</h2>
-        {!isDataSaved && <button onClick={handleAddDivision}>Add Division</button>}
-        <ul>
-            {structure.map((division, index) => (
-            <li key={index}>
-                {division.name}
-                {!isDataSaved && <button onClick={() => handleAddSubdivision(index)}>Add Subdivision</button>}
-                <br /> <br /> 
-                {division.subdivisions.length > 0 && (
-                <ul>
-                    {division.subdivisions.map((subdivision, subIndex) => (
-                    <li key={subIndex} style={{marginLeft: '50px'}}>
-                        {subdivision.name}
-                        {!isDataSaved && <button onClick={() => handleAddNestedSubdivision(index, subIndex)}>Add Subdivision</button>}
-                        <br /> <br /> 
-                        {subdivision.subdivisions.length > 0 && (
-                        <ul>
-                            {subdivision.subdivisions.map((nestedSubdivision, nestedIndex) => (
-                                <li key={nestedIndex} style={{marginLeft: '60px'}}>{nestedSubdivision.name}</li>
-                            ))}
-                            <br />
-                        </ul>
+        <h2 className={style.title}>Organizational Structure</h2>
+        {!isDataSaved && <button className={style.button} onClick={handleAddDivision}>Add Division</button>}
+        <ul className={style.tree}>
+                {structure.map((division, index) => (
+                    <li key={index} className={style.node}>
+                        <div className={style.nodeContent}>
+                            {division.name}
+                            {!isDataSaved && <button className={style.button} onClick={() => handleAddSubdivision(index)}>Add Subdivision</button>}
+                        </div>
+                        {division.subdivisions.length > 0 && (
+                            <ul className={style.subtree}>
+                                {division.subdivisions.map((subdivision, subIndex) => (
+                                    <li key={subIndex} className={style.node}>
+                                        <div className={style.nodeContent}>
+                                            {subdivision.name}
+                                            {!isDataSaved && <button className={style.button} onClick={() => handleAddNestedSubdivision(index, subIndex)}>Add Subdivision</button>}
+                                        </div>
+                                        {subdivision.subdivisions.length > 0 && (
+                                            <ul className={style.subsubtree}>
+                                                {subdivision.subdivisions.map((nestedSubdivision, nestedIndex) => (
+                                                    <li key={nestedIndex} className={style.node}>{nestedSubdivision.name}</li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
                         )}
                     </li>
-                    ))}
-                </ul>
-                )}
-            </li>
-            ))}
-        </ul>
-        {!isDataSaved && <button onClick={handleSave}>Save</button>}
+                ))}
+            </ul>
+        {!isDataSaved && <button className={style.button} onClick={handleSave}>Save</button>}
         {/* {isDataSaved && <button onClick={deleteStructure}>Delete</button>} */}
         {isDataSaved && (
-                <>
+                <div className={style.worker_form}>
                     <form onSubmit={handleAddWorker}>
-                        <input
+                    <div className={style.form_group}>
+                        <label className={style.label} htmlFor="code">Code:</label>
+                        <input className={style.input}
                             type="text"
+                            id="code"
                             name="code"
                             value={workerFormData.code}
-                            placeholder="Code"
+                            placeholder="Enter code"
                             onChange={handleInputChange}
                         />
-                        <input
+                    </div>
+                    <div className={style.form_group}>
+                        <label className={style.label} htmlFor="firstName">First Name:</label>
+                        <input className={style.input}
                             type="text"
+                            id="firstName"
                             name="firstName"
                             value={workerFormData.firstName}
-                            placeholder="First Name"
+                            placeholder="Enter first name"
                             onChange={handleInputChange}
                         />
-                        <input
+                    </div>
+                    <div className={style.form_group}>
+                        <label className={style.label} htmlFor="lastName">Last Name:</label>
+                        <input className={style.input}
                             type="text"
+                            id="lastName"
                             name="lastName"
                             value={workerFormData.lastName}
-                            placeholder="Last Name"
+                            placeholder="Enter last name"
                             onChange={handleInputChange}
                         />
-                        <select
+                    </div>
+                    <div className={style.form_group}>
+                        <label className={style.label} htmlFor="division">Division:</label>
+                        <select className={style.select_form}
+                            id="division"
                             name="division"
                             value={workerFormData.division}
                             onChange={handleInputChange}
@@ -234,13 +252,14 @@ const OrganizationalStructureForm = () => {
                                 </React.Fragment>
                             ))}
                         </select>
-                        <button type="submit" onClick={saveWorker}>Add Worker</button>
-                    </form>
-                </>
+                    </div>
+                    <button type="submit" className={style.button_form}>Add Worker</button>
+                </form>
+                </div>
             )}
-            <div>
-            <h2>Workers</h2>
-            <table>
+            <div style={{margin:"40px"}}>
+            <h2 className={style.title}>Workers</h2>
+            <table className={style.table}>
                 <thead>
                     <tr>
                         <th>Code</th>
