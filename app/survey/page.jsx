@@ -147,13 +147,13 @@ const SurveyForm = () => {
                 
             </div>}
             {!isDataSaved && <button onClick={handleSubmit}>Guardar Preguntas</button>}
-            {isDataSaved && <h1>Cuestionario Clima Laboral</h1>}
+            {isDataSaved && <h1>Working Environment Survey</h1>}
             {isDataSaved && (
                 <table>
                     <thead>
                         <tr>
-                            <th>Dimensión</th>
-                            <th>Pregunta</th>
+                            <th>Dimension</th>
+                            <th>Question</th>
                         </tr>
                     </thead>
                     <tbody>
