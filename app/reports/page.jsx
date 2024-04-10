@@ -160,20 +160,20 @@ const Reportes = () => {
     return (
         <div>
             <Navbar />
-            <h1>Reportes</h1>
+            <h1>Reports</h1>
             <br /><br />
             <h2></h2>
             <h2>{calculateGeneral}</h2>
             <small>General</small>
             <br />
             <br />
-            <p>tasa de respuesta: {((answers.length / workers.length)*100).toFixed(0)} %</p>
+            <p>Answer rate: {((answers.length / workers.length)*100).toFixed(0)} %</p>
             <br />
             <br />
             <table>
                 <thead>
                     <tr>
-                        <th>Dimensión</th>
+                        <th>Dimension</th>
                         <th>Porcentaje</th>
                     </tr>
                 </thead>

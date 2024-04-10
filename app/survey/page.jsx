@@ -105,7 +105,7 @@ const SurveyForm = () => {
     });
 
     const handleButtonClick = () => {
-        const link = `${url}/resolver_encuesta`; // Aquí debes colocar la ruta correcta
+        const link = `${url}/answer_survey`; // Aquí debes colocar la ruta correcta
         copyToClipboard(link);
         alert('The link was copied');
     };
@@ -113,7 +113,7 @@ const SurveyForm = () => {
     return (
         <div>
             <Navbar/>
-            {!isDataSaved && <h1>Formulario para Crear Cuestionario</h1> }
+            {!isDataSaved && <h1>Survey Form</h1> }
             {!isDataSaved && <div>
                 <select value={selectedDimension} onChange={handleDimensionChange}>
                     <option value="">Selecciona una dimensión</option>

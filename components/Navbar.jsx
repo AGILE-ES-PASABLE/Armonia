@@ -23,17 +23,17 @@ const Navbar = () => {
                 <ul className={`navbar-links ${isOpen ? "open" : ""}`}>
                     <li>
                         <Link href="/enterprise">
-                            <span className="navbar-link">Organización</span>
+                            <span className="navbar-link">Organization</span>
                         </Link>
                     </li>
                     <li>
                         <Link href="/survey">
-                            <span className="navbar-link">Cuestionarios</span>
+                            <span className="navbar-link">Survey</span>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/reportes">
-                            <span className="navbar-link">Reportes</span>
+                        <Link href="/reports">
+                            <span className="navbar-link">Reports</span>
                         </Link>
                     </li>
                 </ul>
